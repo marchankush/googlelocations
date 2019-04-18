@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<style>
+		#map {
+			height: 100%;
+		}
+		/* Optional: Makes the sample page fill the window. */
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+	var map;
+	var about_me = [
+		{"about":"Delhi","coords":[28.63849,77.09509]},
+        {"about":"Birth Place","coords":[31.4788,76.275]},
+        {"about":"Brampton","coords":[43.68402,-79.759046]},
+        {"about":"Chandigarh","coords":[30.76218,76.76609]},
+        {"about":"Calgary","coords":[50.44592,-106.890794]},
+		
+		];
+
+	function initMap() {
+		map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 4,
+			center: new google.maps.LatLng(31, 77),
+			mapTypeId: 'terrain'
+		});
+
+		mashParks(about_me);
+	}
+
+	function mashParks(results) {
+	for (var i = 0; i < results.length; i++) {
+		var coords = results[i].coords;
+		var latLng = new google.maps.LatLng(coords[0], coords[1]);
+		var marker = new google.maps.Marker({
+			position: latLng,
+			map: map,
+			label:results[i].about
+			});
+		}
+	}
+
+
+
+</script>
+<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTM5RKrtCLpZAj5HU3K3cTvFNB240NsBg&callback=initMap">
+</script>
+</body>
+</html>
